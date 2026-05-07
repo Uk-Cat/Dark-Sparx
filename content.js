@@ -20,9 +20,12 @@ if (window.darkSparxLoaded) {
 /* --- GLOBAL TEXT OVERRIDE --- */
 /* This ensures all standard text, headers, and labels are white */
 * {
-color: var(--text-main) !important;
-box-shadow: none !important;
-border: none !important;
+    color: var(--text-main) !important;
+    box-shadow: none !important;
+}
+
+*:not(.katex):not(.katex *) {
+    border: none !important;
 }
 
 a {
@@ -78,21 +81,21 @@ span, p, h1, h2, h3, h4, h5, h6, label, b, i, strong, em,
 /* --- 1.5 SUB-ITEM TRANSPARENCY --- */
 /* Force all nested divs inside themed containers to be transparent */
 /* This kills stubborn highlights in Tasks, Activities, and Filters */
-[class*="Activity"] div:not([class*="Chip"]):not([class*="Button"]),
-[class*="Task"] div:not([class*="Chip"]):not([class*="Button"]),
-[class*="Accordion"] div:not([class*="Chip"]):not([class*="Button"]),
-[class*="Collapsible"] div:not([class*="Chip"]):not([class*="Button"]),
-[class*="SearchResult"] div:not([class*="Chip"]):not([class*="Button"]),
-[class*="Topic_"] div:not([class*="Chip"]):not([class*="Button"]),
-[class*="Strand"] div:not([class*="Chip"]):not([class*="Button"]),
-[class*="Filters"] div:not([class*="Chip"]):not([class*="Button"]):not([class*="TextField"]):not([class*="SelectTrigger"]),
-[class*="MenuItem"] div:not([class*="Chip"]):not([class*="Button"]),
-[class*="NotificationList"] div:not([class*="Chip"]):not([class*="Button"]),
-[class*="FeedbackCard"] div:not([class*="Chip"]):not([class*="Button"]):not([class*="Sentiment"]),
-[class*="TablesHomework"] div:not([class*="Chip"]):not([class*="Button"]),
-[class*="TokenProgressBanner"] div:not([class*="Chip"]):not([class*="Button"]),
-[class*="GameButton"] div:not([class*="Chip"]):not([class*="Button"]),
-[class*="GameTypeSelectBanner"] div:not([class*="Chip"]):not([class*="Button"]) {
+[class*="Activity"] div:not([class*="Chip"]):not([class*="Button"]):not([class*="Slot"]):not([class*="Tile"]):not([class*="CardContent"]):not([class*="TextField"]),
+[class*="Task"] div:not([class*="Chip"]):not([class*="Button"]):not([class*="Slot"]):not([class*="Tile"]):not([class*="CardContent"]):not([class*="TextField"]),
+[class*="Accordion"] div:not([class*="Chip"]):not([class*="Button"]):not([class*="Slot"]):not([class*="Tile"]):not([class*="CardContent"]),
+[class*="Collapsible"] div:not([class*="Chip"]):not([class*="Button"]):not([class*="Slot"]):not([class*="Tile"]):not([class*="CardContent"]),
+[class*="SearchResult"] div:not([class*="Chip"]):not([class*="Button"]):not([class*="Slot"]):not([class*="Tile"]):not([class*="CardContent"]),
+[class*="Topic_"] div:not([class*="Chip"]):not([class*="Button"]):not([class*="Slot"]):not([class*="Tile"]):not([class*="CardContent"]),
+[class*="Strand"] div:not([class*="Chip"]):not([class*="Button"]):not([class*="Slot"]):not([class*="Tile"]):not([class*="CardContent"]),
+[class*="Filters"] div:not([class*="Chip"]):not([class*="Button"]):not([class*="TextField"]):not([class*="SelectTrigger"]):not([class*="Slot"]):not([class*="Tile"]),
+[class*="MenuItem"] div:not([class*="Chip"]):not([class*="Button"]):not([class*="Slot"]):not([class*="Tile"]),
+[class*="NotificationList"] div:not([class*="Chip"]):not([class*="Button"]):not([class*="Slot"]):not([class*="Tile"]),
+[class*="FeedbackCard"] div:not([class*="Chip"]):not([class*="Button"]):not([class*="Sentiment"]):not([class*="Slot"]):not([class*="Tile"]),
+[class*="TablesHomework"] div:not([class*="Chip"]):not([class*="Button"]):not([class*="Slot"]):not([class*="Tile"]),
+[class*="TokenProgressBanner"] div:not([class*="Chip"]):not([class*="Button"]):not([class*="Slot"]):not([class*="Tile"]),
+[class*="GameButton"] div:not([class*="Chip"]):not([class*="Button"]):not([class*="Slot"]):not([class*="Tile"]),
+[class*="GameTypeSelectBanner"] div:not([class*="Chip"]):not([class*="Button"]):not([class*="Slot"]):not([class*="Tile"]) {
     background-color: transparent !important;
     background: transparent !important;
 }
@@ -118,7 +121,7 @@ body, html,
 [class*="RewardsPlaqueContainer"],
 [class*="ProgressBarAndLeaderboardsButton"],
 [class*="ProgressBarContainer"],
-[class*="PackageTypeDescription"] * {
+[class*="PackageTypeDescription"] {
     background-color: var(--bg-base) !important;
     background: var(--bg-base) !important;
 }
@@ -354,6 +357,33 @@ ellipse[class*="bg-fill"] {
 
 [class*="SentimentIcon"] [stroke="#c4c6c7"] {
     stroke: var(--text-main) !important;
+}
+
+/* --- 6. MATH & KATEX RENDERING FIXES --- */
+/* Ensure all math formulas (KaTeX) are visible and maintain their layout */
+.katex, .katex * {
+    color: var(--text-main) !important;
+    fill: currentColor !important;
+    background-color: transparent !important;
+}
+
+[class*="AnswerTextElement"],
+[class*="TextElement"] {
+    color: var(--text-main) !important;
+    background-color: transparent !important;
+}
+
+/* Ensure slots containing math have proper contrast */
+[class*="InlineSlot"] .katex-html {
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Specific fix for SVG-based symbols in questions */
+svg[class*="Question"] path,
+svg[class*="Inline"] path {
+    fill: var(--text-main) !important;
 }
 `;
 
